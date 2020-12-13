@@ -1,0 +1,103 @@
+﻿<Window x:Class="AXCH.windows.EnterMV"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AXCH.windows"
+        mc:Ignorable="d"
+        Title="EnterMV" Height="380" Width="800">
+    <Grid Background="#FFDFF5EB">
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Label Content="Добавление материальных ценностей" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="24" />
+        <Label Content="Наименование:" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="NameMVCB" Grid.Row="1" Grid.Column="1"  Height="25" VerticalAlignment="Bottom" SelectionChanged="NameMVCB_SelectionChanged" />
+        <TextBox x:Name="NameMV" Grid.Row="1" Grid.Column="1"  Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Width="130"/>
+
+        <Label Content="Единица измерения :" Grid.Row="1" Grid.Column="5" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="UnitMV" Grid.Row="1" Grid.Column="5"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Категория :" Grid.Row="1" Grid.Column="7" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="Categorie" Grid.Row="1" Grid.Column="7"  Height="25" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Margin="0,0,126,0"/>
+
+        <Label Content="Серийный номер" Grid.Row="1" Grid.Column="3" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="SerialNum" Grid.Row="1" Grid.Column="3"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Код инвенторной карточки" Grid.Row="2" Grid.Column="1" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="0,0,146,0"/>
+        <TextBox x:Name="InventoryCardNunTB" Grid.Row="2" Grid.Column="1"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Дата составления" Grid.Row="2" Grid.Column="3" Height="25" VerticalAlignment="Top"/>
+        <DatePicker x:Name="ComolDateTB" Grid.Row="2" Grid.Column="3"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Код инвенторизации" Grid.Row="2" Grid.Column="5" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="InventoryCode" Grid.Row="2" Grid.Column="5"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Дата ввода в работу" Grid.Row="2" Grid.Column="7" Height="25" VerticalAlignment="Top"/>
+        <DatePicker x:Name="CommisingDate" Grid.Row="2" Grid.Column="7"  Height="25" VerticalAlignment="Bottom"/>
+
+
+        <Label Content="Первоначальная цена" Grid.Row="2" Grid.Column="9" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="InitalCost" Grid.Row="2" Grid.Column="9"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Табельный номер" Grid.Row="3" Grid.Column="1" Height="25" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ServiceNumber" Grid.Row="3" Grid.Column="1"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Срок использования(мес)" Grid.Row="3" Grid.Column="3" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="UsefulLife" Grid.Row="3" Grid.Column="3"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Номер и дата накладной" Grid.Row="3" Grid.Column="5" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="InvoiceDate" Grid.Row="3" Grid.Column="5"  Height="25" VerticalAlignment="Bottom"/>
+
+
+        <Label Content="Вид оборудования" Grid.Row="3" Grid.Column="7" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="EquipmentType" Grid.Row="3" Grid.Column="7"  Height="25" VerticalAlignment="Bottom"/>
+
+        <Label Content="Размер" Grid.Row="4" Grid.Column="1" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Size" Grid.Row="4" Grid.Column="1"   Height="25" VerticalAlignment="Bottom" Margin="0,0,80,0"/>
+
+        <Label Content="Длина" Grid.Row="4" Grid.Column="1" Height="25" VerticalAlignment="Top" Margin="80,0,0,0"/>
+        <TextBox x:Name="Length" Grid.Row="4" Grid.Column="1"   Height="25" VerticalAlignment="Bottom" Margin="80,0,0,0"/>
+
+        <Label Content="Высота" Grid.Row="4" Grid.Column="3" Height="25" VerticalAlignment="Top" Margin="0,0,80,0"/>
+        <TextBox x:Name="Height" Grid.Row="4" Grid.Column="3"   Height="25" VerticalAlignment="Bottom" Margin="0,0,80,0"/>
+
+        <Label Content="Ширина" Grid.Row="4" Grid.Column="3" Height="25" VerticalAlignment="Top" Margin="80,0,0,0"/>
+        <TextBox x:Name="Width" Grid.Row="4" Grid.Column="3"   Height="25" VerticalAlignment="Bottom" Margin="80,0,0,0"/>
+
+        <Label Content="Количество" Grid.Row="4" Grid.Column="5" Height="25" VerticalAlignment="Top" Margin="0,0,80,0"/>
+        <TextBox x:Name="Amount" Grid.Row="4" Grid.Column="5"   Height="25" VerticalAlignment="Bottom" Margin="0,0,80,0"/>
+
+
+
+        <Button Grid.Row="6" Grid.Column="5">
+            Добавить
+        </Button>
+        
+
+
+    </Grid>
+</Window>

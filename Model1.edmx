@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AXCHModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Devisions">
+          <Key>
+            <PropertyRef Name="Devision_Code" />
+          </Key>
+          <Property Name="Devision_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="text" Nullable="false" />
+          <Property Name="WorkingClass" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+          </Key>
+          <Property Name="ServiceNumber" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="text" Nullable="false" />
+          <Property Name="FirstName" Type="text" Nullable="false" />
+          <Property Name="MiddleName" Type="text" Nullable="false" />
+          <Property Name="BirthDay" Type="date" Nullable="false" />
+          <Property Name="Position_FK" Type="int" Nullable="false" />
+          <Property Name="Devision_FK" Type="int" Nullable="false" />
+          <Property Name="Login" Type="text" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="Status" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialValues">
+          <Key>
+            <PropertyRef Name="Code_MV" />
+          </Key>
+          <Property Name="Code_MV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Unit" Type="text" />
+          <Property Name="Category" Type="text" />
+        </EntityType>
+        <EntityType Name="MaterialValuesAccounting">
+          <Key>
+            <PropertyRef Name="Code_MV_Ac" />
+          </Key>
+          <Property Name="Code_MV_Ac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryCardNum" Type="text" Nullable="false" />
+          <Property Name="ComplDate" Type="datetime" Nullable="false" />
+          <Property Name="Code_MV_FK" Type="int" Nullable="false" />
+          <Property Name="InventoryNum" Type="text" Nullable="false" />
+          <Property Name="CommisioningDate" Type="datetime" Nullable="false" />
+          <Property Name="InitalCost" Type="money" />
+          <Property Name="ServiceNumber_FK" Type="int" Nullable="false" />
+          <Property Name="UsefulLife" Type="int" />
+          <Property Name="InvoiceNumberDate" Type="text" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="EquipmentType" Type="text" Nullable="false" />
+          <Property Name="Size" Type="int" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Length" Type="int" />
+          <Property Name="SerialNumber" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_Code" />
+          </Key>
+          <Property Name="Position_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employee_Devisions">
+          <End Role="Devisions" Type="Self.Devisions" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devisions">
+              <PropertyRef Name="Devision_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Devision_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Position_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialValuesAccounting_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="MaterialValuesAccounting" Type="Self.MaterialValuesAccounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ServiceNumber" />
+            </Principal>
+            <Dependent Role="MaterialValuesAccounting">
+              <PropertyRef Name="ServiceNumber_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialValuesAccounting_MaterialValues">
+          <End Role="MaterialValues" Type="Self.MaterialValues" Multiplicity="1" />
+          <End Role="MaterialValuesAccounting" Type="Self.MaterialValuesAccounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialValues">
+              <PropertyRef Name="Code_MV" />
+            </Principal>
+            <Dependent Role="MaterialValuesAccounting">
+              <PropertyRef Name="Code_MV_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AXCHModelContainer">
+          <EntitySet Name="Devisions" EntityType="Self.Devisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialValues" EntityType="Self.MaterialValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialValuesAccounting" EntityType="Self.MaterialValuesAccounting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Devisions" Association="Self.FK_Employee_Devisions">
+            <End Role="Devisions" EntitySet="Devisions" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Positions" Association="Self.FK_Employee_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialValuesAccounting_Employee" Association="Self.FK_MaterialValuesAccounting_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="MaterialValuesAccounting" EntitySet="MaterialValuesAccounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialValuesAccounting_MaterialValues" Association="Self.FK_MaterialValuesAccounting_MaterialValues">
+            <End Role="MaterialValues" EntitySet="MaterialValues" />
+            <End Role="MaterialValuesAccounting" EntitySet="MaterialValuesAccounting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AXCHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Devisions">
+          <Key>
+            <PropertyRef Name="Devision_Code" />
+          </Key>
+          <Property Name="Devision_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkingClass" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Devisions" FromRole="Devisions" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+          </Key>
+          <Property Name="ServiceNumber" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Position_FK" Type="Int32" Nullable="false" />
+          <Property Name="Devision_FK" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Devisions" Relationship="Self.FK_Employee_Devisions" FromRole="Employee" ToRole="Devisions" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK_Employee_Positions" FromRole="Employee" ToRole="Positions" />
+          <NavigationProperty Name="MaterialValuesAccounting" Relationship="Self.FK_MaterialValuesAccounting_Employee" FromRole="Employee" ToRole="MaterialValuesAccounting" />
+        </EntityType>
+        <EntityType Name="MaterialValues">
+          <Key>
+            <PropertyRef Name="Code_MV" />
+          </Key>
+          <Property Name="Code_MV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaterialValuesAccounting" Relationship="Self.FK_MaterialValuesAccounting_MaterialValues" FromRole="MaterialValues" ToRole="MaterialValuesAccounting" />
+        </EntityType>
+        <EntityType Name="MaterialValuesAccounting">
+          <Key>
+            <PropertyRef Name="Code_MV_Ac" />
+          </Key>
+          <Property Name="Code_MV_Ac" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryCardNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComplDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Code_MV_FK" Type="Int32" Nullable="false" />
+          <Property Name="InventoryNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CommisioningDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InitalCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ServiceNumber_FK" Type="Int32" Nullable="false" />
+          <Property Name="UsefulLife" Type="Int32" />
+          <Property Name="InvoiceNumberDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="EquipmentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Size" Type="Int32" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Length" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_MaterialValuesAccounting_Employee" FromRole="MaterialValuesAccounting" ToRole="Employee" />
+          <NavigationProperty Name="MaterialValues" Relationship="Self.FK_MaterialValuesAccounting_MaterialValues" FromRole="MaterialValuesAccounting" ToRole="MaterialValues" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Position_Code" />
+          </Key>
+          <Property Name="Position_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Positions" FromRole="Positions" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employee_Devisions">
+          <End Role="Devisions" Type="Self.Devisions" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devisions">
+              <PropertyRef Name="Devision_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Devision_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Position_Code" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Position_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialValuesAccounting_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="MaterialValuesAccounting" Type="Self.MaterialValuesAccounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ServiceNumber" />
+            </Principal>
+            <Dependent Role="MaterialValuesAccounting">
+              <PropertyRef Name="ServiceNumber_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialValuesAccounting_MaterialValues">
+          <End Role="MaterialValues" Type="Self.MaterialValues" Multiplicity="1" />
+          <End Role="MaterialValuesAccounting" Type="Self.MaterialValuesAccounting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialValues">
+              <PropertyRef Name="Code_MV" />
+            </Principal>
+            <Dependent Role="MaterialValuesAccounting">
+              <PropertyRef Name="Code_MV_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AXCHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Devisions" EntityType="Self.Devisions" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="MaterialValues" EntityType="Self.MaterialValues" />
+          <EntitySet Name="MaterialValuesAccounting" EntityType="Self.MaterialValuesAccounting" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
+          <AssociationSet Name="FK_Employee_Devisions" Association="Self.FK_Employee_Devisions">
+            <End Role="Devisions" EntitySet="Devisions" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Positions" Association="Self.FK_Employee_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialValuesAccounting_Employee" Association="Self.FK_MaterialValuesAccounting_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="MaterialValuesAccounting" EntitySet="MaterialValuesAccounting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialValuesAccounting_MaterialValues" Association="Self.FK_MaterialValuesAccounting_MaterialValues">
+            <End Role="MaterialValues" EntitySet="MaterialValues" />
+            <End Role="MaterialValuesAccounting" EntitySet="MaterialValuesAccounting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AXCHModelContainer" CdmEntityContainer="AXCHEntities">
+          <EntitySetMapping Name="Devisions">
+            <EntityTypeMapping TypeName="AXCHModel.Devisions">
+              <MappingFragment StoreEntitySet="Devisions">
+                <ScalarProperty Name="Devision_Code" ColumnName="Devision_Code" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="WorkingClass" ColumnName="WorkingClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="AXCHModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Position_FK" ColumnName="Position_FK" />
+                <ScalarProperty Name="Devision_FK" ColumnName="Devision_FK" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialValues">
+            <EntityTypeMapping TypeName="AXCHModel.MaterialValues">
+              <MappingFragment StoreEntitySet="MaterialValues">
+                <ScalarProperty Name="Code_MV" ColumnName="Code_MV" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialValuesAccounting">
+            <EntityTypeMapping TypeName="AXCHModel.MaterialValuesAccounting">
+              <MappingFragment StoreEntitySet="MaterialValuesAccounting">
+                <ScalarProperty Name="Code_MV_Ac" ColumnName="Code_MV_Ac" />
+                <ScalarProperty Name="InventoryCardNum" ColumnName="InventoryCardNum" />
+                <ScalarProperty Name="ComplDate" ColumnName="ComplDate" />
+                <ScalarProperty Name="Code_MV_FK" ColumnName="Code_MV_FK" />
+                <ScalarProperty Name="InventoryNum" ColumnName="InventoryNum" />
+                <ScalarProperty Name="CommisioningDate" ColumnName="CommisioningDate" />
+                <ScalarProperty Name="InitalCost" ColumnName="InitalCost" />
+                <ScalarProperty Name="ServiceNumber_FK" ColumnName="ServiceNumber_FK" />
+                <ScalarProperty Name="UsefulLife" ColumnName="UsefulLife" />
+                <ScalarProperty Name="InvoiceNumberDate" ColumnName="InvoiceNumberDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="EquipmentType" ColumnName="EquipmentType" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="AXCHModel.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Position_Code" ColumnName="Position_Code" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

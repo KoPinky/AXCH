@@ -1,0 +1,44 @@
+﻿<Window x:Class="AXCH.windows.ListMV"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AXCH.windows"
+        mc:Ignorable="d"
+        Title="ListMV" Height="450" Width="800">
+    <Grid Background="#FFDFF5EB">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Список материальных ценностей" Grid.Row="0" HorizontalAlignment="Center" FontSize="24"/>
+        <Button Content="добавить МЦ" Grid.Row="1" Width="100" Height="25" Click="AddMV_Click" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Red" Offset="0"/>
+                    <GradientStop Color="#FFFB0202" Offset="1"/>
+                    <GradientStop Color="#FFFF00F5" Offset="0.132"/>
+                    <GradientStop Color="#FF1900FF" Offset="0.246"/>
+                    <GradientStop Color="#FF00FFF5" Offset="0.371"/>
+                    <GradientStop Color="Lime" Offset="0.5"/>
+                    <GradientStop Color="#FFFFE800" Offset="0.814"/>
+                    <GradientStop Color="#FFCFFF00" Offset="0.65"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <DataGrid x:Name="MVList" HorizontalAlignment="Left" Height="309" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" Grid.Row="2" AutoGenerateColumns="False" KeyUp="EmployeeList_KeyUp"> 
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding FullName}"   Width="*"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Amount}" Width="*"/>
+                <DataGridTextColumn Header="Код инвенторизации" Binding="{Binding InventoryNum}" Width="*"/>
+                <DataGridTextColumn Header="Серийный номер" Binding="{Binding SerialNumber}" Width="*"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</Window>
